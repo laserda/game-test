@@ -8,6 +8,17 @@ Arena = function(game) {
     var light2 = new BABYLON.HemisphericLight("light2", new BABYLON.Vector3(0, -1, 0), scene);
     light2.intensity = 0.8;
 
+    // var light3 = new BABYLON.PointLight("Spot0", new BABYLON.Vector3(-40, 10, -100), scene);
+    // light3.intensity = 0.3;
+    // light3.specular = new BABYLON.Color3(0,0,0);
+
+    // var shadowGenerator1 = new BABYLON.ShadowGenerator(2048, light3);
+    // shadowGenerator1.usePoissonSampling = true;
+    // shadowGenerator1.bias = 0.0005;
+
+    // light.intensity = 0.2;
+    // light2.intensity = 0.2;
+
     // Material pour le sol
     var materialGround = new BABYLON.StandardMaterial("wallTexture", scene);
     materialGround.diffuseTexture = new BABYLON.Texture("assets/images/tile.jpg", scene);
@@ -17,13 +28,22 @@ Arena = function(game) {
     // Material pour les objets
     var materialWall = new BABYLON.StandardMaterial("groundTexture", scene);
     materialWall.diffuseTexture = new BABYLON.Texture("assets/images/tile.jpg", scene);
+   
 
+    // var boxArena = BABYLON.Mesh.CreateBox("box1", 100, scene, false, BABYLON.Mesh.BACKSIDE);
+    // boxArena.material = materialGround;
+    // boxArena.position.y = 50 * 0.3;
+    // boxArena.scaling.y = 0.3;
+    // boxArena.scaling.z = 0.8;
+    // boxArena.scaling.x = 3.5;
     var boxArena = BABYLON.Mesh.CreateBox("box1", 100, scene, false, BABYLON.Mesh.BACKSIDE);
     boxArena.material = materialGround;
     boxArena.position.y = 50 * 0.3;
     boxArena.scaling.y = 0.3;
     boxArena.scaling.z = 0.8;
     boxArena.scaling.x = 3.5;
+
+    boxArena.checkCollisions = true;
 
     var columns = [];
     var numberColumn = 6;
@@ -35,6 +55,7 @@ Arena = function(game) {
             let mainCylinder = BABYLON.Mesh.CreateCylinder("cyl0-"+i, 30, 5, 5, 20, 4, scene);
             mainCylinder.position = new BABYLON.Vector3(-sizeArena/2,30/2,-20 + (40 * i));
             mainCylinder.material = materialWall;
+            mainCylinder.checkCollisions = true;
             columns[i].push(mainCylinder);
 
             if(numberColumn>1){
