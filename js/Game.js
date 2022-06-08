@@ -24,7 +24,7 @@ Game = function(canvasId) {
     this.engine = engine;
     var _this = this;
     _this.actualTime = Date.now();
-    
+
     this.allSpawnPoints = [
         new BABYLON.Vector3(-20, 5, 0),
         new BABYLON.Vector3(0, 5, 0),
@@ -120,7 +120,7 @@ Game.prototype = {
                 // On vérifie qu'on a bien touché quelque chose
                 if(meshFound.pickedMesh && !meshFound.pickedMesh.isMain){
                     // On crée une sphere qui représentera la zone d'impact
-                    var explosionRadius = BABYLON.Mesh.CreateSphere("sphere", 5.0, 20, this.scene);
+                    var explosionRadius = BABYLON.Mesh.CreateSphere("sphere", 5.0, 50, this.scene);
                     // On positionne la sphère là où il y a eu impact
                     explosionRadius.position = meshFound.pickedPoint;
                     // On fait en sorte que les explosions ne soient pas considérées pour le Ray de la roquette

@@ -173,6 +173,9 @@ Player.prototype = {
 
         // On crée la caméra
         this.camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 0, 0), scene);
+
+        // On active la caméra
+        this.game.scene.activeCamera = this.camera;
         this.camera.playerBox = playerBox
         this.camera.parent = this.camera.playerBox;
         // La santé du joueur
@@ -212,7 +215,7 @@ Player.prototype = {
         // // Si le joueur est en vie ou non
         // this.isAlive = true;
         
-        // // On demande à la caméra de regarder au point zéro de la scène
+        // On demande à la caméra de regarder au point zéro de la scène
         // this.camera.setTarget(BABYLON.Vector3.Zero());
         
         
@@ -280,13 +283,15 @@ Player.prototype = {
 
         // On signale à Weapons que le joueur est mort
         this.isAlive=false;
+
+        // // On réinitialise la position de la caméra
+        // this.camera.setTarget(BABYLON.Vector3.Zero());
+
         var newPlayer = this;
         var canvas = this.game.scene.getEngine().getRenderingCanvas();
         setTimeout(()=>{ 
             newPlayer._initCamera(newPlayer.game.scene, canvas);
-            // On réinitialise la position de la caméra
-            // newPlayer.camera.setTarget(BABYLON.Vector3.Zero());
-            // newPlayer.game.scene.activeCamera = this.camera;
+            
         }, 4000);
     },
     
